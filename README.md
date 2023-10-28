@@ -7,3 +7,9 @@
 ```
 ValidURL(url string) bool
 ```
+
+## models
+``
+ModelVault
+
+```
