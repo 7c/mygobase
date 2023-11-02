@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	got, err := domain.ParseDomain("sub.google.com.au")
+	got, err := domain.ParseDomain("foo.blogspot.co.uk")
 	if err != nil {
 		log.Fatal(err)
 	}
