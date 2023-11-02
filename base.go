@@ -1,6 +1,7 @@
 package mygobase
 
 import (
+	"fmt"
 	"net"
 	"net/url"
 )
@@ -38,6 +39,15 @@ func ValidIP6(ip string) bool {
 		return false
 	}
 	if parsedIP.To4() != nil {
+		return false
+	}
+	return true
+}
+
+func lockPort(port int) bool {
+	_, err := net.Listen("tcp", fmt.Sprintf("127.0.0.1:%d", port))
+	if err != nil {
+		fmt.Println("Error starting TCP server:", err)
 		return false
 	}
 	return true
