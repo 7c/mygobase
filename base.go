@@ -4,11 +4,20 @@ import (
 	"fmt"
 	"net"
 	"net/url"
+	"os"
 )
 
 func ValidURL(input string) bool {
 	myo, error := url.Parse(input)
 	return error == nil && myo.Scheme != "" && myo.Host != ""
+}
+
+func FileExists(filename string) bool {
+	info, err := os.Stat(filename)
+	if os.IsNotExist(err) {
+		return false
+	}
+	return !info.IsDir()
 }
 
 func ValidIP(ip string) bool {

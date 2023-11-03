@@ -10,6 +10,7 @@ ValidURL(url string) bool
 ValidIP(ip string) bool 
 ValidIP4(ip string) bool 
 ValidIP6(ip string) bool 
+FileExists(filename string) bool
 ```
 
 ## /domain
