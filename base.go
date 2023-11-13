@@ -53,7 +53,7 @@ func ValidIP6(ip string) bool {
 	return true
 }
 
-func lockPort(port int) bool {
+func LockPort(port int) bool {
 	_, err := net.Listen("tcp", fmt.Sprintf("127.0.0.1:%d", port))
 	if err != nil {
 		fmt.Println("Error starting TCP server:", err)

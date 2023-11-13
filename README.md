@@ -1,7 +1,7 @@
 # mygobase
 
 ## import
-`go get github.com/7c/mygobase`
+`go get -u github.com/7c/mygobase`
 
 
 ## base functions
@@ -11,6 +11,7 @@ ValidIP(ip string) bool
 ValidIP4(ip string) bool 
 ValidIP6(ip string) bool 
 FileExists(filename string) bool
+LockPort(port int) bool 
 ```
 
 ## /domain
