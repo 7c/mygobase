@@ -53,11 +53,20 @@ func ValidIP6(ip string) bool {
 	return true
 }
 
-func LockPort(port int) bool {
-	_, err := net.Listen("tcp", fmt.Sprintf("127.0.0.1:%d", port))
+func LockPort(port int) *net.Listener {
+	listener, err := net.Listen("tcp", fmt.Sprintf("127.0.0.1:%d", port))
 	if err != nil {
-		fmt.Println("Error starting TCP server:", err)
-		return false
+		// log.Println("Error starting TCP server:", err)
+		return nil
 	}
-	return true
+	go func() {
+		for {
+			_, err := listener.Accept()
+			if err != nil {
+				break
+			}
+		}
+	}()
+	// log.Println("mutex tcp port is ", port)
+	return &listener
 }
