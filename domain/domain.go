@@ -3,6 +3,7 @@ package domain
 import (
 	"errors"
 	"fmt"
+	"net/url"
 	"regexp"
 	"strings"
 
@@ -52,6 +53,16 @@ func IsValidDomain(domain string) bool {
 // parsed ICAAN domains
 func ParseDomain(domain string) (*DomainParsed, error) {
 	domain = strings.TrimSpace(domain)
+
+	// lets support urls as well
+	u, err1 := url.Parse(domain)
+	if err1 != nil {
+		return nil, ERRInvalidDomain
+	}
+	if u.Scheme != "" && u.Host != "" {
+		domain = u.Host
+	}
+
 	if man, eTLD := pslManager(domain); man == ICAAN {
 		dp := new(DomainParsed)
 		etld_len := len(strings.Split(eTLD, "."))
@@ -69,7 +80,7 @@ func ParseDomain(domain string) (*DomainParsed, error) {
 			return nil, ERRInvalidDomain
 		}
 
-		dp.Sub = fmt.Sprintf(`%s`, strings.Join(parts[:len(parts)-1], "."))
+		dp.Sub = strings.Join(parts[:len(parts)-1], ".")
 
 		// dp.Domain = fmt.Sprintf(`%s`, strings.Join(parts[len(parts)-1:], "."))
 
