@@ -7,6 +7,7 @@ var validDomains []string = []string{
 	"golang.net",
 	"play.golang.org",
 	"gophers.in.space.museum",
+	"test.uk",
 }
 
 func TestIsValidDomain(t *testing.T) {
@@ -26,5 +27,6 @@ func TestParseDomain(t *testing.T) {
 		if dp.Full != dom {
 			t.Errorf("Domain '%s' was parsed but does not match with .Full property", dom)
 		}
+		t.Logf("Domain '%s' parsed as '%+v'", dom, dp)
 	}
 }
